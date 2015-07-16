@@ -279,17 +279,21 @@ In the above code examples, you will notice that we have called .pipe() multiple
 
  in a task, the javascript files are "streamed" through the pipeline:
 
+``
 a.js \
 b.js --> [{a.js},{b.js},{c.js}] --> concat('temp.js')   --> uglify()           --> ./dist/temp.min.js
 c.js /                              \> [{temp.js}]      |   \> [{temp.min.js}] |
+``
 
 Notice here that the things moving through the pipeline get transformed along the way. We start out with three discrete javascript files. The first stage of the pipeline, our concatenation stage, merges those files together into a temp.js via simple concatenation. Our stream now consists of a single thing. The next stage of the pipeline "uglifies" the temp.js file (minifies and obfuscates), and it outputs a single thing into the stream. 
 
 It should also be noted that the things in our pipeline really do "stream" through. The first stage of our pipeline gets a.js first, and concat will write the contents of that .js file to the temp.js file as it receives it. Then it will receive b.js, and write that, then it will receive c.js and write that. With streaming, you don't have to complete the reading of all source files first...they can be delivered as they are read. A more interesting pipeline from above is our build:html task. This actually works with multiple files as a stream for a couple of stages. We might have a state in our pipeline like this:
 
+``
 a.jade \
 b.jade --> [...,...,{c.jade}] --> jade()                --> minhtml()                 --> ...
 c.jade /                          \> [...,{b.html},...] |   \> [{a.min.html},...,...] |
+``
 
 In this case, c.jade was just read off disk, but b.jade has already been converted to b.html, and a.jade was already converted to a.html and minified to a.min.html. Pipelines **stream**, and as such, are very efficient.
 

@@ -1,17 +1,17 @@
 # Gulp: The JavaScript Build System
 
-What is Gulp?
-Installing Gulp
-Plugins
-Tasks
-Pipelines
-The Gulpfile
-gulp-david?
-More Complex Things (gulp-newer gulp-if)
-- Watch
-- WebServer
-- Plumbing
-Questions
+- What is Gulp?
+- Installing Gulp
+- Plugins
+- Tasks
+- Pipelines
+- The Gulpfile
+- gulp-david?
+- More Complex Things (gulp-newer gulp-if)
+  - Watch
+  - WebServer
+  - Plumbing
+- Questions
 
 ## What is Gulp?
 
